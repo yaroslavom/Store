@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import connectDB from "./config/db.js";
-import data from "./data/data.js";
+import products from "./data/products.js";
 
 dotenv.config();
 
@@ -15,13 +15,13 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/data/", (req, res) => {
-  res.send(data.results);
+  res.send(products);
 });
 
 app.get("/api/data/:id", (req, res) => {
   console.log(req.params.id);
-  res.send([data.results[req.params.id]]);
-  console.log(data.results[req.params.id]);
+  res.send([products[req.params.id]]);
+  console.log(products[req.params.id]);
 });
 
 const PORT = process.env.PORT || 9090;
