@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import connectDB from "./config/db.js";
-import products from "./data/products.js";
+import productRoutes from "./routes/productRoutes.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
 
@@ -14,15 +15,11 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-app.get("/api/data/", (req, res) => {
-  res.send(products);
-});
+app.use("/api/products", productRoutes);
 
-app.get("/api/data/:id", (req, res) => {
-  console.log(req.params.id);
-  res.send([products[req.params.id]]);
-  console.log(products[req.params.id]);
-});
+app.use(notFound); // handling error middleware
+
+app.use(errorHandler); // handling error (if 200 but have err)
 
 const PORT = process.env.PORT || 9090;
 
