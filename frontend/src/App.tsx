@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from './hooks';
+import { getProducts, selectProducts, IProducts } from './store/productSlice';
 import './style.css';
 
-interface Book {
-	name: string;
-	// ...
-}
-
 const App = () => {
-	const [data, setData] = useState<Array<Book>>([]);
+	const dispatch = useAppDispatch();
+	const data: [IProducts] = useAppSelector(selectProducts);
 
 	useEffect(() => {
-		(async () => {
-			const response = await axios.get('/api/data/1');
-			setData(response.data);
-		})();
-	}, []);
+		dispatch(getProducts());
+	}, [dispatch]);
 
 	return (
 		<>
-			{console.log(data, 'data')}
 			{data.length &&
-				data.map((el) => {
+				data.map((el: any) => {
 					return (
 						<div key={el.name} className="container">
 							<p>{el.name}</p>
