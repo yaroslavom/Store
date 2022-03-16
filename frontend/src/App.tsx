@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Header from './components/Header';
 import { useAppSelector, useAppDispatch } from './hooks';
 import { getProducts, selectProducts, IProducts } from './store/productSlice';
 import './style.css';
@@ -13,7 +14,8 @@ const App = () => {
 
 	return (
 		<>
-			{data.length &&
+			<Header />
+			{!!data.length &&
 				data.map((el: any) => {
 					return (
 						<div key={el.name} className="container">
