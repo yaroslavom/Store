@@ -5,12 +5,20 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { styled } from '@mui/system';
+
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+	margin: '0 60px',
+	[theme.breakpoints.down('md')]: {
+		margin: '0',
+	},
+}));
 
 export default function Header() {
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar sx={{ backgroundColor: 'black', px: 6 }} position="static">
-				<Toolbar>
+			<AppBar sx={{ backgroundColor: 'black' }} position="static">
+				<StyledToolbar>
 					<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
 						<MenuIcon />
 					</IconButton>
@@ -18,7 +26,7 @@ export default function Header() {
 						News
 					</Typography>
 					<Button color="inherit">Login</Button>
-				</Toolbar>
+				</StyledToolbar>
 			</AppBar>
 		</Box>
 	);

@@ -1,28 +1,20 @@
-import { useEffect } from 'react';
-import Header from './components/Header';
-import { useAppSelector, useAppDispatch } from './hooks';
-import { getProducts, selectProducts, IProducts } from './store/productSlice';
+import { Route, Routes } from 'react-router-dom';
+import HomeScreen from './container/HomeScreen';
+import Layout from './container/Layout';
+import ProductScreen from './container/ProductScreen';
 import './style.css';
 
 const App = () => {
-	const dispatch = useAppDispatch();
-	const data: [IProducts] = useAppSelector(selectProducts);
-
-	useEffect(() => {
-		dispatch(getProducts());
-	}, [dispatch]);
-
 	return (
 		<>
-			<Header />
-			{!!data.length &&
-				data.map((el: any) => {
-					return (
-						<div key={el.name} className="container">
-							<p>{el.name}</p>
-						</div>
-					);
-				})}
+			<Routes>
+				<Route path="/" element={<Layout />}>
+					<Route index element={<HomeScreen />} />
+					<Route path="products" element={<HomeScreen />} />
+					<Route path="products/:id" element={<ProductScreen />} />
+					<Route path="*" element={<HomeScreen />} />
+				</Route>
+			</Routes>
 		</>
 	);
 };
