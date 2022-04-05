@@ -6,12 +6,11 @@ import { useAppSelector } from '../hooks';
 import { selectProducts } from '../infrastructure/productSlice';
 
 const ProductScreen = () => {
+	const [count, setCount] = React.useState(0);
 	const { products } = useAppSelector(selectProducts);
 	const { id } = useParams<'id'>();
 	const navigate = useNavigate();
 	const product = products.find((p: any) => p._id === id);
-	console.log(product?.name);
-	console.log(products);
 	return (
 		<Wrapper>
 			<Button
@@ -22,9 +21,10 @@ const ProductScreen = () => {
 			>
 				GO BACK
 			</Button>
-			<img src="assets/images/airpods.jpeg" alt="img" />
-			<img src="assets/images/airpods.jpeg" alt="img" />
+			<img src="../assets/images/airpods.jpeg" alt="img" />
 			<div>{product?.name}</div>
+			<div>{count}</div>
+			<button onClick={() => setCount((count) => ++count)}>Add</button>
 		</Wrapper>
 	);
 };

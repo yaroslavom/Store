@@ -8,13 +8,16 @@ module.exports = {
 		extensions: ['.tsx', '.ts', '.js'],
 		alias: {
 			'@mui/styled-engine': '@mui/styled-engine-sc',
+			// 'react-dom': '@hot-loader/react-dom',
+			// assets: path.resolve(__dirname, '..', 'src/assets'),
 		},
 	},
 	output: {
 		path: path.resolve(__dirname, '..', './build'),
 		clean: true,
 		publicPath: '/',
-		filename: 'build_[hash].js',
+		filename: '[name].bundle.js',
+		chunkFilename: '[name].bundle.js',
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -34,7 +37,7 @@ module.exports = {
 				exclude: /node_modules/,
 				use: [
 					{
-						loader: require.resolve('babel-loader'),
+						loader: require.resolve('babel-loader'), // or ts-loader
 					},
 				],
 			},
@@ -49,18 +52,11 @@ module.exports = {
 			{
 				test: /\.(png|svg|jpg|jpeg|gif)$/i,
 				type: 'asset/resource',
-				// use: ['file-loader'],
 			},
 			{
 				test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
 				type: 'asset/inline',
 			},
 		],
-	},
-	devServer: {
-		historyApiFallback: true,
-		proxy: {
-			'/api': 'http://127.0.0.1:9090',
-		},
 	},
 };

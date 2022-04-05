@@ -7,9 +7,6 @@ import Rating from './Rating';
 import { Link } from 'react-router-dom';
 
 const Product = ({ product }: any) => {
-	//
-	console.log(`..${product.image}`);
-	//
 	return (
 		<Card>
 			<Link to={`products/${product._id}`}>

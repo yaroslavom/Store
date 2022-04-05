@@ -5,10 +5,11 @@ module.exports = {
 	devServer: {
 		hot: true,
 		open: true,
-		// proxy: {
-		// 	'/api': 'http://127.0.0.1:9090',
-		// },
+		historyApiFallback: true,
+		proxy: {
+			'/api': 'http://127.0.0.1:9090',
+		},
 	},
-	devtool: 'cheap-module-source-map',
+	devtool: 'eval-cheap-module-source-map',
 	plugins: [new ReactRefreshWebpackPlugin()],
 };

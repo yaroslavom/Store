@@ -23,7 +23,6 @@ const HomeScreen = () => {
 				columns={{ xs: 2, sm: 8, md: 12 }}
 				mt="auto !important"
 			>
-				<img src="assets/images/airpods.jpeg" alt="some" />
 				{Array.isArray(products) &&
 					products.map((product: any, index: number) => {
 						return (
