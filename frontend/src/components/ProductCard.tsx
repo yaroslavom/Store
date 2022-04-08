@@ -12,23 +12,23 @@ const Product = ({ product }: any) => {
 			<Link to={`products/${product._id}`}>
 				<CardMedia
 					component="img"
-					height="194"
+					height="auto"
 					image={`assets${product.image}`}
 					alt={product.name}
 				/>
 			</Link>
-			<Link to={`products/${product._id}`}>
-				<CardContent>
-					<Typography variant="body1" color="text.secondary">
+			<CardContent>
+				<Link to={`products/${product._id}`}>
+					<Typography variant="h6" color="text.secondary">
 						<strong>{product.name}</strong>
 					</Typography>
-				</CardContent>
-			</Link>
-			<CardContent sx={{ display: 'flex' }}>
+				</Link>
+			</CardContent>
+			<CardContent sx={{ display: 'flex', py: 0 }}>
 				<Rating value={product.rating} text={`${product.numReviews} reviews`} />
 			</CardContent>
 			<CardContent>
-				<Typography variant="h4" color="text.secondary">
+				<Typography variant="h5" color="text.secondary">
 					${product.price}
 				</Typography>
 			</CardContent>

@@ -12,13 +12,13 @@ const ProductsScreen = () => {
 			<Grid
 				container
 				spacing={{ xs: 2, md: 3 }}
-				columns={{ xs: 2, sm: 8, md: 12 }}
+				columns={{ xs: 2, sm: 9, md: 12 }}
 				mt="auto !important"
 			>
 				{Array.isArray(products) &&
 					products.map((product: any, index: number) => {
 						return (
-							<Grid item xs={6} sm={4} md={4} key={index}>
+							<Grid item xs={6} sm={3} md={3} key={index}>
 								<ProductCard product={product} />
 							</Grid>
 						);
