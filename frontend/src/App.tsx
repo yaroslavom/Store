@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-import HomeScreen from './container/HomeScreen';
+import HomePage from './container/HomePage';
 import Layout from './container/Layout';
-import ProductScreen from './container/ProductScreen';
+import ProductPage from './container/ProductPage';
 import './style.css';
 
 const App = () => {
@@ -9,10 +9,10 @@ const App = () => {
 		<>
 			<Routes>
 				<Route path="/" element={<Layout />}>
-					<Route index element={<HomeScreen />} />
-					<Route path="products" element={<HomeScreen />} />
-					<Route path="products/:id" element={<ProductScreen />} />
-					<Route path="*" element={<HomeScreen />} />
+					<Route index element={<HomePage />} />
+					<Route path="products" element={<HomePage />} />
+					<Route path="products/:id" element={<ProductPage />} />
+					<Route path="*" element={<HomePage />} />
 				</Route>
 			</Routes>
 		</>

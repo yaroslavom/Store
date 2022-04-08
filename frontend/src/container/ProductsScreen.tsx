@@ -1,20 +1,12 @@
-import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../hooks';
-import { getProducts, selectProducts } from '../infrastructure/productSlice';
+import { useAppSelector } from '../hooks';
+import { selectProducts } from '../infrastructure/productSlice';
 import { Grid } from '@mui/material';
 import ProductCard from '../components/ProductCard';
-import { Wrapper } from '../components/Wrapper';
 
-const HomeScreen = () => {
-	const dispatch = useAppDispatch();
+const ProductsScreen = () => {
 	const { products, error, status } = useAppSelector(selectProducts);
-	console.log(products, 'prod app');
-
-	useEffect(() => {
-		dispatch(getProducts());
-	}, [dispatch]);
 	return (
-		<Wrapper>
+		<>
 			{status === 'pending' && <p>Loading...</p>}
 			{error && <p>{error}</p>}
 			<Grid
@@ -32,8 +24,8 @@ const HomeScreen = () => {
 						);
 					})}
 			</Grid>
-		</Wrapper>
+		</>
 	);
 };
 
-export default HomeScreen;
+export default ProductsScreen;
