@@ -1,27 +1,27 @@
 import { useAppSelector } from '../hooks';
-import { selectProducts } from '../infrastructure/productSlice';
 import { Grid } from '@mui/material';
 import ProductCard from '../components/ProductCard';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { IProduct } from '../interfaces';
 
 const ProductsScreen = () => {
-	const { products, error, status } = useAppSelector(selectProducts);
+	const { products, error, status } = useAppSelector((state) => state.productList);
 	return (
 		<>
 			{status === 'pending' && <Loader />}
 			{error && <Message variant="error">{error}</Message>}
-			{status !== 'pending' && (
+			{status === 'fulfilled' && (
 				<Grid
 					container
 					spacing={{ xs: 2, md: 3 }}
-					columns={{ xs: 2, sm: 9, md: 12 }}
+					// columns={{ xs: 12, md: 12, lg: 12 }}
 					mt="auto !important"
 				>
 					{Array.isArray(products) &&
-						products.map((product: any, index: number) => {
+						products.map((product: IProduct, index: number) => {
 							return (
-								<Grid item xs={6} sm={3} md={3} key={index}>
+								<Grid item xs={6} md={4} lg={3} key={index}>
 									<ProductCard product={product} />
 								</Grid>
 							);

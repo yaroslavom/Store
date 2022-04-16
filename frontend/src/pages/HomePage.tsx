@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '../hooks';
-import { getProducts } from '../infrastructure/productSlice';
+import { getProducts } from '../context/productsListSlice';
 import { Wrapper } from '../components/Wrapper';
-import ProductsScreen from './ProductsScreen';
+import ProductsScreen from '../containers/ProductsScreen';
 
 const HomePage = () => {
 	const dispatch = useAppDispatch();

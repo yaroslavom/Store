@@ -10,7 +10,7 @@ import {
 	REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import productSlice from './productSlice';
+import rootReducer from './reducers';
 
 const persistConfig = {
 	key: 'root',
@@ -18,7 +18,7 @@ const persistConfig = {
 	storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, productSlice);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
 	reducer: persistedReducer,
@@ -33,5 +33,5 @@ export const store = configureStore({
 
 export const persistor = persistStore(store);
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;

@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { status, IProduct } from '../interfaces';
 
 export const getProducts = createAsyncThunk(
 	'products/getProducts',
 	async (_, { rejectWithValue }) => {
 		try {
-			const { data } = await axios.get('/api/products/');
+			const { data } = await axios.get<IProduct[]>('/api/products/');
 			return data;
 		} catch (error: any) {
 			return rejectWithValue(
@@ -15,23 +16,23 @@ export const getProducts = createAsyncThunk(
 	},
 );
 
-export interface IProducts {
-	products: any;
-	status: null | string;
+type sliceState = {
+	products: IProduct[] | any;
+	status: status;
 	error: any;
-}
-
-const initialState: IProducts = {
-	products: [],
-	status: null,
-	error: null,
 };
 
-const productsSlice = createSlice({
+const initialState: sliceState = {
+	products: [],
+	status: 'idle',
+	error: false,
+};
+
+const productsListSlice = createSlice({
 	name: 'products',
 	initialState,
 	reducers: {
-		addProducts(state: IProducts, action: PayloadAction) {
+		addProducts(state: sliceState, action: PayloadAction) {
 			state.products.push(action.payload);
 		},
 	},
@@ -44,17 +45,13 @@ const productsSlice = createSlice({
 			state.products = action.payload;
 			state.status = action.meta.requestStatus;
 		});
-		builder.addCase(getProducts.rejected, (state, action: any) => {
-			// console.log(action.payload, 'action.payload')
-			// console.log(action.error, 'action.error')
+		builder.addCase(getProducts.rejected, (state, action) => {
 			state.error = action.payload;
 			state.status = action.meta.requestStatus;
 		});
 	},
 });
 
-export const { addProducts } = productsSlice.actions;
+export const { addProducts } = productsListSlice.actions;
 
-export const selectProducts = (state: IProducts) => state;
-
-export default productsSlice.reducer;
+export default productsListSlice.reducer;

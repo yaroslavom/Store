@@ -1,12 +1,12 @@
 import React, { ReactChildren } from 'react';
 import { Alert, AlertTitle } from '@mui/material';
 
-interface IProps {
+type Props = {
 	variant?: 'error' | 'warning' | 'info' | 'success';
 	children: ReactChildren;
-}
+};
 
-const Message = ({ variant = 'error', children }: IProps) => {
+const Message: React.FC<Props> = ({ variant = 'error', children }) => {
 	return (
 		<Alert severity={variant}>
 			<AlertTitle>{children}</AlertTitle>

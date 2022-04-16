@@ -5,8 +5,13 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Rating from './Rating';
 import { Link } from 'react-router-dom';
+import { IProduct } from '../interfaces';
 
-const Product = ({ product }: any) => {
+interface Props {
+	product: IProduct;
+}
+
+const Product: React.FC<Props> = ({ product }) => {
 	return (
 		<Card>
 			<Link to={`products/${product._id}`}>
