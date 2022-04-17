@@ -1,12 +1,33 @@
-import { Button, Box, Grid, Stack, Typography, Divider, Card, CardContent } from '@mui/material';
+import {
+	Button,
+	Box,
+	Grid,
+	Stack,
+	Typography,
+	Divider,
+	Card,
+	CardContent,
+	FormControl,
+	Select,
+	MenuItem,
+	FormHelperText,
+} from '@mui/material';
 import Rating from '../components/Rating';
 import { IProduct } from '../interfaces';
 
 interface Props {
 	product: IProduct | Record<string, never>;
+	quantityChangeHandler: any;
+	selectedProductHandler: any;
+	quantity: any;
 }
 
-const ProductContainer: React.FC<Props> = ({ product }) => {
+const ProductContainer: React.FC<Props> = ({
+	product,
+	quantityChangeHandler,
+	selectedProductHandler,
+	quantity,
+}) => {
 	return (
 		<Grid container spacing={{ xs: 2, md: 4 }} columns={{ sm: 9, md: 12 }} mt="auto !important">
 			<Grid item xs={6}>
@@ -55,8 +76,37 @@ const ProductContainer: React.FC<Props> = ({ product }) => {
 							Status: {product.countInStock > 0 ? 'In stock' : 'Out of stock'}
 						</Typography>
 						<Divider orientation="horizontal" flexItem />
+						{product.countInStock > 0 && (
+							<>
+								<Box display="flex" justifyContent="space-between">
+									<Typography
+										sx={{ fontSize: 14, mt: 1, display: 'block' }}
+										variant="overline"
+										color="text.secondary"
+									>
+										Quantity:
+									</Typography>
+									<FormControl sx={{ my: 1, minWidth: 80 }}>
+										<Select
+											value={quantity}
+											onChange={quantityChangeHandler}
+											displayEmpty
+											inputProps={{ 'aria-label': 'Without label', sx: { p: '8.5px 14px' } }}
+										>
+											{[...Array(product.countInStock).keys()].map((el) => (
+												<MenuItem key={el} value={++el}>
+													{el}
+												</MenuItem>
+											))}
+										</Select>
+										<FormHelperText>Choose quantity</FormHelperText>
+									</FormControl>
+								</Box>
+								<Divider orientation="horizontal" flexItem />
+							</>
+						)}
 						<Button
-							onClick={() => console.log('added to card')}
+							onClick={() => selectedProductHandler()}
 							disabled={product.countInStock === 0}
 							variant="outlined"
 							fullWidth

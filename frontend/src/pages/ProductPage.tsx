@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, SetStateAction, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -9,6 +9,7 @@ import Message from '../components/Message';
 import ProductContainer from '../containers/ProductContainer';
 
 const ProductPage = () => {
+	const [quantity, setQuantity] = useState('');
 	const { id } = useParams<'id'>();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -18,6 +19,14 @@ const ProductPage = () => {
 	}, [dispatch, id]);
 
 	const { product, status, error } = useAppSelector((state) => state.productDetails);
+
+	const quantityChangeHandler = (event: { target: { value: SetStateAction<string> } }) => {
+		setQuantity(event.target.value);
+	};
+
+	const selectedProductHandler = () => {
+		navigate(`/cart/${id}?qty=${quantity}`);
+	};
 
 	return (
 		<Wrapper>
@@ -31,7 +40,14 @@ const ProductPage = () => {
 			</Button>
 			{status === 'pending' && <Loader />}
 			{error && <Message variant="error">{error}</Message>}
-			{product && status === 'fulfilled' && <ProductContainer product={product} />}
+			{product && status === 'fulfilled' && (
+				<ProductContainer
+					product={product}
+					quantityChangeHandler={quantityChangeHandler}
+					selectedProductHandler={selectedProductHandler}
+					quantity={quantity}
+				/>
+			)}
 		</Wrapper>
 	);
 };
