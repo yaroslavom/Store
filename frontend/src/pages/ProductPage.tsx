@@ -1,6 +1,6 @@
 import { useState, SetStateAction, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, SelectChangeEvent } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { getProduct } from '../context/productDetailsSlice';
 import { Wrapper } from '../components/Wrapper';
@@ -9,7 +9,7 @@ import Message from '../components/Message';
 import ProductContainer from '../containers/ProductContainer';
 
 const ProductPage = () => {
-	const [quantity, setQuantity] = useState('');
+	const [quantity, setQuantity] = useState<SetStateAction<number | string>>(1);
 	const { id } = useParams<'id'>();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -20,7 +20,9 @@ const ProductPage = () => {
 
 	const { product, status, error } = useAppSelector((state) => state.productDetails);
 
-	const quantityChangeHandler = (event: { target: { value: SetStateAction<string> } }) => {
+	const quantityChangeHandler = (
+		event: SelectChangeEvent<React.SetStateAction<number | string>>,
+	) => {
 		setQuantity(event.target.value);
 	};
 

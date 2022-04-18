@@ -7,19 +7,20 @@ import {
 	Divider,
 	Card,
 	CardContent,
-	FormControl,
-	Select,
-	MenuItem,
-	FormHelperText,
+	SelectChangeEvent,
 } from '@mui/material';
 import Rating from '../components/Rating';
+import Select from '../components/Select';
 import { IProduct } from '../interfaces';
 
 interface Props {
 	product: IProduct | Record<string, never>;
-	quantityChangeHandler: any;
-	selectedProductHandler: any;
-	quantity: any;
+	quantityChangeHandler: (
+		event: SelectChangeEvent<React.SetStateAction<number | string>>,
+		child: React.ReactNode,
+	) => void;
+	selectedProductHandler: () => void;
+	quantity: React.SetStateAction<string | number>;
 }
 
 const ProductContainer: React.FC<Props> = ({
@@ -86,21 +87,12 @@ const ProductContainer: React.FC<Props> = ({
 									>
 										Quantity:
 									</Typography>
-									<FormControl sx={{ my: 1, minWidth: 80 }}>
-										<Select
-											value={quantity}
-											onChange={quantityChangeHandler}
-											displayEmpty
-											inputProps={{ 'aria-label': 'Without label', sx: { p: '8.5px 14px' } }}
-										>
-											{[...Array(product.countInStock).keys()].map((el) => (
-												<MenuItem key={el} value={++el}>
-													{el}
-												</MenuItem>
-											))}
-										</Select>
-										<FormHelperText>Choose quantity</FormHelperText>
-									</FormControl>
+									<Select
+										selected={quantity}
+										items={product.countInStock}
+										changeHandler={quantityChangeHandler}
+										helpText={'Choose quantity'}
+									/>
 								</Box>
 								<Divider orientation="horizontal" flexItem />
 							</>
