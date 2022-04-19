@@ -7,6 +7,7 @@ import { Wrapper } from '../components/Wrapper';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import ProductContainer from '../containers/ProductContainer';
+import { addToCart } from '../context/productCartSlice';
 
 const ProductPage = () => {
 	const [quantity, setQuantity] = useState<SetStateAction<number | string>>(1);
@@ -27,6 +28,7 @@ const ProductPage = () => {
 	};
 
 	const selectedProductHandler = () => {
+		dispatch(addToCart({ ...product, quantity }));
 		navigate(`/cart/${id}?qty=${quantity}`);
 	};
 
