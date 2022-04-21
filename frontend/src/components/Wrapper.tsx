@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 const StyledWrapper = styled(Container)(({ theme }) => ({
 	width: 'auto',
-	margin: '0 60px',
+	margin: '16px 60px',
 	[theme.breakpoints.down('md')]: {
 		margin: '0',
 	},

@@ -16,13 +16,7 @@ const productCartSlice = createSlice({
 				: state.cart.push(item);
 		},
 		removeFromCart: (state, action) => {
-			console.log(state, action);
-			// import { PURGE } from "redux-persist";
-
-			// extraReducers: (builder) => {
-			//     builder.addCase(PURGE, (state) => {
-			//         customEntityAdapter.removeAll(state);
-			//     });
+			state.cart = state.cart.filter((x: any) => x._id !== action.payload._id);
 		},
 	},
 });

@@ -39,6 +39,7 @@ const ProductPage = () => {
 					navigate(-1);
 				}}
 				variant="outlined"
+				sx={{ margin: '16px 0 0 16px' }}
 			>
 				GO BACK
 			</Button>
