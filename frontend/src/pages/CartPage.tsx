@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
 	Box,
 	Button,
@@ -29,6 +29,7 @@ interface ISelectedProduct extends IProduct {
 const CartPage = () => {
 	// const qty = location.search ? Number(location.search.split('=')[1]) : 1; // if use query with search params
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const { cart } = useAppSelector((state) => state.productCart);
 
 	const quantityChangeHandler =
@@ -36,8 +37,8 @@ const CartPage = () => {
 		(event: SelectChangeEvent<React.SetStateAction<number | string>>) => {
 			dispatch(addToCart({ ...product, quantity: Number(event.target.value) }));
 		};
-
 	const removeProductHandler = (product: ISelectedProduct) => dispatch(removeFromCart(product));
+	const checkoutHandler = () => navigate('/login?redirect=shipping');
 
 	return (
 		<Wrapper>
@@ -124,7 +125,7 @@ const CartPage = () => {
 							</Typography>
 							<Divider orientation="horizontal" flexItem />
 							<Button
-								onClick={() => console.log('What a beautiful world')}
+								onClick={checkoutHandler}
 								disabled={cart.length === 0}
 								variant="outlined"
 								fullWidth
