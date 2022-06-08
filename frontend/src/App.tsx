@@ -1,9 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
+import CartPage from './pages/CartPage';
+import LoginPage from './pages/LoginPage';
 import Layout from './containers/Layout';
 import './style.css';
-import CartPage from './pages/CartPage';
 
 const App = () => {
 	return (
@@ -16,6 +17,7 @@ const App = () => {
 					<Route path="cart" element={<CartPage />}>
 						<Route path=":id" element={<CartPage />} />
 					</Route>
+					<Route path="login" element={<LoginPage />} />
 					<Route path="*" element={<HomePage />} />
 				</Route>
 			</Routes>

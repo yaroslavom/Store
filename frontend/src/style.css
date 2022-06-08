@@ -7,3 +7,8 @@ html {
 a {
 	text-decoration: none;
 }
+
+.flexContainer-column {
+	display: flex;
+	flex-direction: column;
+}

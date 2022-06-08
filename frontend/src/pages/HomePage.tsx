@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '../hooks';
 import { getProducts } from '../context/productsListSlice';
-import { Wrapper } from '../components/Wrapper';
+import { Wrapper } from '../containers/Wrapper';
 import ProductsScreen from '../containers/ProductsScreen';
 
 const HomePage = () => {

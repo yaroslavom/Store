@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Message from '../components/Message';
-import { Wrapper } from '../components/Wrapper';
+import { Wrapper } from '../containers/Wrapper';
 import Select from '../components/Select';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { addToCart, removeFromCart } from '../context/productCartSlice';

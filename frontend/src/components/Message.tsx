@@ -8,7 +8,7 @@ type Props = {
 
 const Message: React.FC<Props> = ({ variant = 'error', children }) => {
 	return (
-		<Alert severity={variant}>
+		<Alert severity={variant} sx={{ pb: 0 }}>
 			<AlertTitle>{children}</AlertTitle>
 		</Alert>
 	);

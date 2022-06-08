@@ -31,7 +31,9 @@ export default function Header() {
 							<ShoppingCart color="secondary" fontSize="small" />
 						</IconButton>
 					</Link>
-					<Button color="inherit">Login</Button>
+					<Link to={'/login'}>
+						<Button color="secondary">Login</Button>
+					</Link>
 				</StyledToolbar>
 			</AppBar>
 		</Box>

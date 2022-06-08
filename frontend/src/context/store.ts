@@ -16,7 +16,7 @@ const persistConfig = {
 	key: 'root',
 	version: 1,
 	storage,
-	whitelist: ['productCart'], // Things to persist
+	whitelist: ['productCart', 'userLogin'], // Things to persist
 	blacklist: [],
 };
 

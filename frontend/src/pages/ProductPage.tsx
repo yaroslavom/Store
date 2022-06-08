@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Button, SelectChangeEvent } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { getProduct } from '../context/productDetailsSlice';
-import { Wrapper } from '../components/Wrapper';
+import { Wrapper } from '../containers/Wrapper';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import ProductContainer from '../containers/ProductContainer';
